@@ -1,0 +1,35 @@
+%matplotlib inline
+from matplotlib import pyplot as plt
+import numpy as np
+import cv2
+
+image = cv2.imread('mao.png')
+hsv_image = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
+h, s, v = cv2.split(image)
+
+(T, h2) = cv2.threshold(h, 0, 120, cv2.THRESH_BINARY)
+(T, s2) = cv2.threshold(s, 0, 120, cv2.THRESH_BINARY)
+(T, v2) = cv2.threshold(v, 200, 255, cv2.THRESH_BINARY)
+
+img = cv2.merge([h2, s2, v2])
+
+plt.subplot(1, 7, 1)
+plt.imshow(h)
+
+plt.subplot(1, 7, 2)
+plt.imshow(s)
+
+plt.subplot(1, 7, 3)
+plt.imshow(v)
+
+plt.subplot(1, 7, 4)
+plt.imshow(h2)
+
+plt.subplot(1, 7, 5)
+plt.imshow(s2)
+
+plt.subplot(1, 7, 6)
+plt.imshow(v2)
+
+plt.subplot(1, 7, 7)
+plt.imshow(img)
